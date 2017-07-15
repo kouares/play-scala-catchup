@@ -1,0 +1,58 @@
+@* edit Template File *@
+@(noteBookForm:Form[controllers.forms.NotebookFormObj.NotebookForm])(implicit request:Request[Any], messages: Messages)
+
+@import helper._
+
+@main("更新") {
+<script src="@routes.Assets.versioned("javascripts/viewhelper.js")"></script>
+@form(CSRF(routes.NotebookController.update), 'class -> "container", 'role -> "form") {
+<h1>更新</h1>
+<fieldset>
+    <div class="row">
+        <div class="form-group">
+            @inputText(noteBookForm("title"), '_label -> "タイトル", 'class -> "form-control", '_help->"")
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            @textarea(noteBookForm("mainText"), '_label -> "備忘録", 'class -> "form-control", 'rows -> "10")
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <dl>
+                <dt>
+                    <label for="tag">タグ</label>
+                </dt>
+                <dd>
+                    <div id="tagdisp" class="tagdisp">
+                        @noteBookForm.apply("tags").indexes.map { i =>
+                        <span class="label label-info">@noteBookForm(s"tags[$i]").value<span class="init-tag-remove">x</span></span> }
+                    </div>
+                    <input type="text" id="tag" class="form-control">
+                </dd>
+            </dl>
+        </div>
+    </div>
+    @noteBookForm("title").value.map { value =>
+    <input type="hidden" name="title" value="@value" /> }
+    <div class="row">
+        <input type="submit" value="更新" class="btn btn-primary" />
+    </div>
+    <dd class="error">
+    @(noteBookForm.error("db.error") match {
+      case Some(error) => error.message
+      case None =>
+    })
+    @(noteBookForm.error("error.not.exists.notebook") match {
+      case Some(error) => error.message
+      case None =>
+    })
+    @(noteBookForm.error("error.dummy") match {
+      case Some(error) => error.message
+      case None =>
+    })
+    </dd>
+</fieldset>
+}
+}

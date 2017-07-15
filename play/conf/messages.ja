@@ -1,0 +1,12 @@
+# default error message overwrite
+error.required =必須項目です
+error.minLength =最低{0}文字は入力してください
+error.maxLength=最大{0}文字までです
+
+# verify
+error.not.exists.notebook=更新対象の備忘録が存在しません
+error.dummy=ダミーエラー
+
+# verify test
+error.test1=テスト用エラーメッセージ１
+error.test2=テスト用エラーメッセージ２

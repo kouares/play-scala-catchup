@@ -1,0 +1,6 @@
+# mysql
+docker pull busybox
+docker pull mysql/mysql-server:5.6
+docker build -t strage_image
+docker run -it -v /var/lib/mysql --name strage_container strage_image
+docker run --volumes-from strage_container --name mysql_container -e MYSQL_ROOT_PASSWORD=passwd -d -p 3306:3306 mysql/mysql-server:5.6 --character-set-server=utf8mb4 --collection-server=utf8mb4_unicode_ci

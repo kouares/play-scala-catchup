@@ -1,0 +1,35 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# default
+# An example controller showing a sample home page
+#GET     /                           controllers.HomeController.index
+# An example controller showing how to use dependency injection
+#GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+#GET     /message                    controllers.AsyncController.message
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# refactor routes
+GET     /notebooks                  controllers.notebook.NotebookController.list
+POST    /notebooks                  controllers.notebook.NotebookController.create
+PUT     /notebooks/:id            controllers.notebook.NotebookController.update(id: Int)
+DELETE  /notebooks/:id             controllers.notebook.NotebookController.delete(id: Int)
+
+
+# notebook
+# notebook index
+GET     /notebook                   controllers.NotebookController.index
+# notebook create
+GET     /notebook/showcreate        controllers.NotebookController.showcreate
+POST    /notebook/create            controllers.NotebookController.create
+# notebook read
+GET     /notebook/list              controllers.NotebookController.list
+GET		/notebook/freeword			controllers.NotebookController.freeword
+GET     /notebook/edit              controllers.NotebookController.edit(title: String)
+# notebook update
+POST    /notebook/update            controllers.NotebookController.update
+# notebook delete
+POST    /notebook/remove:title      controllers.NotebookController.remove(title: String)

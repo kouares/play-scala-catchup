@@ -1,0 +1,39 @@
+@* edit Template File *@
+@(noteBookForm:Form[controllers.forms.NotebookFormObj.NotebookForm])(implicit request:Request[Any], messages: Messages)
+
+@import helper._
+
+@main("登録") {
+<script src="@routes.Assets.versioned("javascripts/viewhelper.js")"></script>
+@form(CSRF(routes.NotebookController.create), 'class -> "container", 'role -> "form") {
+<h1>登録</h1>
+<fieldset>
+    <div class="row">
+        <div class="form-group">
+            @inputText(noteBookForm("title"), '_label -> "タイトル", 'placeholder -> "例：Play でハマった所", 'class -> "form-control", '_help->"")
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            @textarea(noteBookForm("mainText"), '_label -> "備忘録", 'placeholder -> "備忘録", 'class -> "form-control", 'rows -> "10")
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <dl>
+                <dt>
+                    <label for="tag">タグ</label>
+                </dt>
+                <dd>
+                    <div id="tagdisp" class="tagdisp"></div>
+                    <input type="text" id="tag" placeholder="タグ" class="form-control">
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="row">
+        <input type="submit" value="登録" class="btn btn-primary" />
+    </div>
+</fieldset>
+}
+}

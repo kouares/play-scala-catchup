@@ -1,0 +1,54 @@
+@* list Template File *@
+@(notebookForm: Form[controllers.forms.NotebookFormObj.NotebookForm], notebooks: Seq[controllers.forms.NotebookFormObj.NotebookForm])(implicit request: Request[Any],  messages: Messages)
+
+@import helper._
+
+@main("一覧") {
+<div class="row">
+  @form(CSRF(routes.NotebookController.freeword), 'class -> "cnontainer", 'role -> "form") {
+    <div class="form-group">
+      <div class="col-md-6">
+        <input type="text" name="mainText" class="form-control" placeholder="フリーワード例：Play" value="@notebookForm("mainText").value">
+        <input type="hidden" name="title" value="dummy">
+      </div>
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary">検索</button>
+      </div>
+    </div>
+  }	
+</div>
+  
+<div class="row">
+  <div class="col-md-12">
+    <a href="@routes.NotebookController.showcreate()" class="btn btn-default" role="button">作成</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>タグ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @notebooks.map { notebook =>
+        <tr>
+          <td><a href="@routes.NotebookController.edit(notebook.title)">@notebook.title</a></td>
+          <td>
+            @notebook.tags.map { tag =>
+            <span class="label label-info">@tag</span> }
+          </td>
+          <td>@helper.form(CSRF(routes.NotebookController.remove(notebook.title))) {
+            <input type="submit" value="削除" class="btn btn-danger btn-xs" /> }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+}

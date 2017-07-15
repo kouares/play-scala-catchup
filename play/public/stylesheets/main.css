@@ -1,0 +1,23 @@
+dd.error {
+    color: red;
+}
+
+div.tagdisp {
+    margin-bottom: 5px;
+}
+
+span.tag-remove {
+    padding: 0px 2px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+span.init-tag-remove {
+    padding: 0px 2px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+div.row {
+	margin-bottom: 10px;
+}
